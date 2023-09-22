@@ -1,0 +1,331 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>GoldParkerAz</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'home_static/css/bootstrap.min.css' %}">
+      <!-- style css -->
+      <link rel="stylesheet" href="{% static 'home_static/css/style.css' %}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{% static 'home_static/css/responsive.css' %}">
+      <!-- fevicon -->
+      <link rel="icon" href="{% static 'home_static/images/fevicon.png' %}" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{% static 'home_static/css/jquery.mCustomScrollbar.min.css' %}">
+
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets -->
+      <link rel="stylesheet" href="{% static 'home_static/css/owl.carousel.min.css' %}">
+      <link rel="stylesheet" href="{% static 'home_static/css/owl.theme.default.min.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+       <link rel="stylesheet" href="{% static 'home_static/css/style_1.css' %}">
+       <link rel="stylesheet" href="{% static 'home_static/css/serch.css' %}">
+
+
+
+
+
+
+
+   </head>
+   <body>
+
+      <!-- header section start -->
+      <div class="header_section">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+               <a class="logo" href="{% url 'index' %}"><img src="{% static 'home_static/images/logo_94x44.png' %}"></a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                     <li class="nav-item">
+                        <a class="nav-link {% if '/' == request.path %} active {% endif %}" href="{% url 'index' %}">Ana Səhifə</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link {% if 'about' in request.path %} active {% endif %}" href="{% url 'about' %}">Haqqımızda</a>
+                     </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link {% if 'shop' in request.path %} active {% endif %}" href="{% url 'shop' %}">Məhsullar</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link {% if 'contact' in request.path %} active {% endif %}" href="{% url 'contact' %}">Əlaqə</a>
+
+                     </li>
+                  </ul>
+               {% comment %}
+                  <form class="form-inline my-2 my-lg-0">
+                     <div class="search_icon">
+                        <ul>
+
+
+                           <a href="#"> <li><i class="bi bi-whatsapp"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25 fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+  <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                               </svg></i></li></a>
+                            {% comment %}
+                           <li><a href="#"><img src="{% static 'home_static/images/user-icon.png' %}"></a></li>
+
+                        </ul>
+
+                     </div>
+
+                  </form>
+                   {% endcomment %}
+
+               </div>
+
+         </nav>
+
+         </div>
+      </div>
+      <!-- header section end -->
+
+      {% block index_page %} {% endblock %}
+
+
+
+      {% block about_page %}{% endblock %}
+      {%  block shop_page %}{% endblock %}
+      {% block contact %} {% endblock %}
+      {%  block shop_page_all %} {% endblock %}
+      {% comment %}
+      <!-- about section start -->
+      <div class="about_section layout_padding">
+         <div class="container">
+            <div class="about_section_2">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="image_2"><img src="{% static 'home_static/images/img-2.png' %}"></div>
+                  </div>
+                  <div class="col-md-6">
+                     <h1 class="about_taital">About Us</h1>
+                     <p class="about_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised </p>
+                     <div class="readmore_bt"><a href="#">Read More</a></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- about section end -->
+
+
+
+      <!--  design section start -->
+      <div class="design_section layout_padding">
+         <div id="my_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="design_taital">Our Work Furniture</h1>
+                     <p class="design_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteratio</p>
+                     <div class="design_section_2">
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Chair 01</p>
+                                 <div class="image_3" href="#"><img src="{% static 'home_static/images/img-3.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Chair 02</p>
+                                 <div class="image_4" href="#"><img src="{% static 'home_static/images/img-4.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Table</p>
+                                 <div class="image_4" href="#"><img src="{% static 'home_static/images/img-5.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="design_taital">Our Work Furniture</h1>
+                     <p class="design_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteratio</p>
+                     <div class="design_section_2">
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Chair 01</p>
+                                 <div class="image_3" href="#"><img src="{% static 'home_static/images/img-3.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Chair 02</p>
+                                 <div class="image_4" href="#"><img src="{% static 'home_static/images/img-4.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Table</p>
+                                 <div class="image_4" href="#"><img src="{% static 'home_static/images/img-5.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="design_taital">Our Work Furniture</h1>
+                     <p class="design_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteratio</p>
+                     <div class="design_section_2">
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Chair 01</p>
+                                 <div class="image_3" href="#"><img src="{% static 'home_static/images/img-3.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Chair 02</p>
+                                 <div class="image_4" href="#"><img src="{% static 'home_static/images/img-4.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">Table</p>
+                                 <div class="image_4" href="#"><img src="{% static 'home_static/images/img-5.png' %}"></div>
+                                 <p class="chair_text">Price $100</p>
+                                 <div class="buy_bt"><a href="#">Buy Now</a></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+            <i class="fa fa-long-arrow-left" style="font-size:24px"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+            <i class="fa fa-long-arrow-right" style="font-size:24px"></i>
+            </a>
+         </div>
+         <div class="container">
+            <div class="read_bt"><a href="#">Read More</a></div>
+         </div>
+      </div>
+      <!--  design section end -->
+
+
+      <!--  newsletter section start -->
+      <div class="newsletter_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="imgage_6"><img src="{% static 'home_static/images/img-6.png' %}"></div>
+               </div>
+               <div class="col-md-6">
+                  <h1 class="newsletter_taital">Subscribe Newsletter</h1>
+                  <input type="text" class="email_text" placeholder="Enter Your Email" name="Enter Your Email">
+                  <div class="subscribe_bt"><a href="#">Subscribe Now</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--  newsletter section end -->
+
+
+
+      <!-- contact section start -->
+      <div class="contact_section layout_padding">
+         <div class="container">
+            <div class="contact_section_2">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="mail_section_1">
+                        <h1 class="contact_taital">Contact Us</h1>
+                        <input type="text" class="mail_text" placeholder="Name" name="text">
+                        <input type="text" class="mail_text" placeholder="Email" name="text">
+                        <input type="text" class="mail_text" placeholder="Phone Number" name="text">
+                        <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
+                        <div class="send_bt"><a href="#">SEND</a></div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="map_main">
+                        <div class="map-responsive">
+                           <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="360" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- contact section end -->
+      {% endcomment %}
+
+
+
+      <!-- footer section start -->
+      {% include 'home_templates/footer.html' %}
+      <!-- footer section end -->
+
+      <!-- copyright section start -->
+
+      <div class="copyright_section">
+         <div class="container">
+            <p class="copyright_text">2020 All Rights Reserved. Design by <a href="https://html.design">Free html  Templates</a></p>
+         </div>
+      </div>
+
+      <!-- copyright section end -->
+      <!-- Javascript files-->
+      <script src="{% static 'home_static/js/jquery.min.js' %}"></script>
+      <script src="{% static 'home_static/js/popper.min.js' %}"></script>
+      <script src="{% static 'home_static/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'home_static/js/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'home_static/js/plugin.js' %}"></script>
+      <!-- sidebar -->
+      <script src="{% static 'home_static/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <script src="{% static 'home_static/js/custom.js' %}"></script>
+      <!-- javascript -->
+      <script src="{% static 'home_static/js/owl.carousel.js' %}"></script>
+      <script src = "{% static 'home_static/js/say.js' %}"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+       <script src="https://partner.googleadservices.com/gampad/cookie.js?domain=bestjquery.com&callback=_gfp_s_&client=ca-pub-3311815518700050"></script>
+       <script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202309070101/show_ads_impl_fy2021.js?bust=31077720" id="google_shimpl"></script>
+       <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+   </body>
+</html>
