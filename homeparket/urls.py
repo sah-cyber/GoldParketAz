@@ -1,5 +1,5 @@
 from django.urls import path
-from . views import IndexView,AboutView,CategoryDetailView,ShopView,ContactFormView
+from . views import IndexView,AboutView,ContactFormView,SearchView,ShopView,CategoryView
 
 
 
@@ -12,9 +12,10 @@ urlpatterns = [
     path('shop_page/', views.shop_page, name='shop_page'),
     path('shop_page_one/<slug:shop_slug>/', views.shop_page_one, name='shop_page_one'),
     path('about_page/<slug:about_slug>/', views.about_page, name='about_page'),
-    #path('email_send/', views.email_adres, name='email_send'),
-    #path('contact/', views.email_adres, name='contact'),
-    path('category/<int:pk>/',CategoryDetailView.as_view(), name='category'),
-    path('shop/', ShopView.as_view(), name = 'shop'),
+    path('category/<slug:cats_slug>/',CategoryView.as_view(), name='category'),
 
-]
+    path('shop/', ShopView.as_view(), name = 'shop'),
+    path('search/', SearchView.as_view(), name = 'search'),
+
+
+ ]

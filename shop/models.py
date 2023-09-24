@@ -23,8 +23,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absalute_url_category(self):
-    #     return reverse_lazy('category', self.pk)
+
+    def get_absalute_url_category(self):
+        return reverse_lazy('category', kwargs={'cats_slug': self.slug})
 
 
     class Meta:
@@ -37,7 +38,7 @@ class Shop(models.Model):
     slug = models.SlugField(max_length=100,unique=True,null=True)
     categoriya = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Categoriya')
     contry = models.ForeignKey(Contry,blank=True,null=True, on_delete=models.CASCADE,verbose_name='Olke')
-    text = models.TextField(verbose_name='Etrafli')
+    text = models.TextField(verbose_name='Etrafli',blank=True)
     shop_img = models.ImageField(upload_to='Shop_img/%Y/%m/%d/',verbose_name='Shop_img', blank=True,null=True)
     price = models.DecimalField(default=0, max_digits = 5,decimal_places = 2, verbose_name='Price')
     creted_at = models.DateTimeField(auto_now_add=True,verbose_name='Qeyd_tarixi')

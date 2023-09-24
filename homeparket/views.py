@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
@@ -8,7 +9,7 @@ from shop.models import Shop, Contry, Category
 from form.models import ContactForm, Contact
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import TemplateView, ListView, DetailView, FormView
-
+from django.db.models import Count
 
 class IndexView(TemplateView):
     template_name = 'home_templates/index.html'
@@ -19,23 +20,11 @@ class IndexView(TemplateView):
         context['about'] = About.objects.all()
         context['category'] = Category.objects.all()
         context['total_shop'] = Shop.objects.all().count()
-        context['reklam'] = Reklam_b.objects.all().order_by('-creted_up')
+        context['reklam'] = Reklam_b.objects.all().filter(public=True).order_by('-creted_up')
+        context['title'] = 'GoldParketaz'
         return context
 
 
-# def index(request):
-#     carusel = Carusel.objects.all().order_by('-creted_up')
-#     about = About.objects.all()
-#     category = Category.objects.all()
-#     reklam = Reklam_b.objects.all().order_by('-creted_up')
-#     context = {
-#         'carusel':carusel,
-#         'about': about,
-#         'category': category,
-#         'reklam':reklam,
-#
-#     }
-#     return render(request, 'home_templates/index.html',context)
 
 
 class AboutView(TemplateView):
@@ -44,6 +33,7 @@ class AboutView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['about'] = About.objects.filter(public=True).order_by('-creted_up')
+        context['title'] = 'Haqqimizda'
 
         return context
 
@@ -54,6 +44,7 @@ def about_page(request, about_slug):
     about_page = About.objects.all().filter(slug=about_slug)
     context = {
         'about_page': about_page,
+        'title': 'Haqimizda',
     }
     return render(request, 'home_templates/about_page.html', context)
 
@@ -62,15 +53,45 @@ def about_page(request, about_slug):
 class ShopView(ListView):
     model = Shop
     template_name = 'home_templates/shop.html'
+    #context_object_name = 'shop'
     paginate_by = 4
-    context_object_name = 'category'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_obj'] = Shop.objects.all().filter(public=True).order_by('-creted_up')
-        context['category'] = Category.objects.all()
-        context['category_total'] = Category.objects.all().count()
+        # Mehsulun sayi
+        context['category_lak'] = Shop.objects.filter(categoriya__name='Parket laki',public=True).count()
+        context['category_kleyi'] = Shop.objects.filter(categoriya__name='Parket kleyi',public=True).count()
+        context['diger'] = Shop.objects.filter(categoriya__name='Diger',public=True).count()
+        context['parket'] = Shop.objects.filter(categoriya__name='Parket',public=True).count()
+        context['title'] = 'Mehsullarimiz'
         return context
+
+    def get_queryset(self):
+        return Shop.objects.filter(public=True).order_by('creted_at')
+
+
+
+class SearchView(ListView):
+    template_name = 'home_templates/search.html'
+    model = Shop
+    #context_object_name = 'search'
+    paginate_by = 4
+
+    def get_queryset(self):
+        return Shop.objects.filter(name__icontains=self.request.GET.get('q'))
+
+
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q']=self.request.GET.get('q')
+        context['title'] = 'Netice'
+
+        return context
+
+
+
 
 
 # def shop(request):
@@ -98,84 +119,54 @@ class ContactFormView(SuccessMessageMixin, FormView):
     success_message = "Sizin Mektub Gonderildi"
 
 
-
-
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Contact'
+        return context
 
 
 
-# def contact(request):
-#
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         mesaces = SuccessMessageMixin()
-#         if form.is_valid():
-#             form.save()
-#             form = ContactForm()
-#             mesaces.success_message
-#     else:
-#         form = ContactForm()
-#
-#     context = {
-#         'form': form,
-#         'mesaces': mesaces,
-#
-#     }
-#
-#     return  render(request,'home_templates/contact.html',context)
+class CategoryView(ListView):
+    template_name = 'home_templates/category_page.html'
+    model = Shop
+    context_object_name = 'category'
+
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Categoriya'
+        return context
+
+    def get_queryset(self):
+        return Shop.objects.filter(categoriya__slug=self.kwargs['cats_slug'],public=True)
+
+
+
+
 
 
 def shop_page(request):
-    shop = Shop.objects.all().order_by('-creted_up')
+    shop = Shop.objects.all().filter(public=True).order_by('-creted_up')
     context = {
         'shop': shop,
+        'title': 'Butun Mehsullar',
     }
     return render(request, 'home_templates/shop_page.html', context)
 
 
 
 def shop_page_one(request, shop_slug):
-    shop_p_one = Shop.objects.all().filter(slug=shop_slug)
+    shop_p_one = Shop.objects.all().filter(slug=shop_slug).order_by('-creted_up')
     context = {
         'shop_p_one': shop_p_one,
+        'title': 'Mehsul',
     }
     return render(request, 'home_templates/shop_page_one.html', context)
 
 
 
-class CategoryDetailView(DetailView):
-    # specify the model to use
-    model = Category
-    template_name = 'home_templates/category_page.html'
-    context_object_name = 'category'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = Category.objects.filter(id=self.kwargs['pk'])
-        return context
-
-# def category(request, cat_id):
-#     category = Category.objects.filter(pk=cat_id)
-#     shop = Shop.objects.all()
-#
-#     context = {
-#         'category': category,
-#         'shop' :shop,
-#     }
-#
-#     return render(request, 'home_templates/category_page.html',context)
-#
-
-# def email_adres(request):
-#     # mesajes = SuccessMessageMixin()
-#     # mesaj = mesajes.success_message = 'your recivied your request'
-#     contact = ContactForm()
-#     context = {
-#         'contakt':contact,
-#         # 'mesaj': mesaj,
-#     }
-#
-#     return render(request, 'home_templates/send_sms.html', context)

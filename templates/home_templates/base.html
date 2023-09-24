@@ -11,7 +11,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>GoldParkerAz</title>
+      <title>{{ title }}</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -34,11 +34,6 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
        <link rel="stylesheet" href="{% static 'home_static/css/style_1.css' %}">
        <link rel="stylesheet" href="{% static 'home_static/css/serch.css' %}">
-
-
-
-
-
 
 
    </head>
@@ -99,11 +94,12 @@
       {% block index_page %} {% endblock %}
 
 
-
+      {% block category_page %}{% endblock %}
       {% block about_page %}{% endblock %}
       {%  block shop_page %}{% endblock %}
-      {% block contact %} {% endblock %}
-      {%  block shop_page_all %} {% endblock %}
+      {% block contact %}{% endblock %}
+      {%  block shop_page_all%} {% endblock %}
+      {% block search_page %} {% endblock %}
       {% comment %}
       <!-- about section start -->
       <div class="about_section layout_padding">
