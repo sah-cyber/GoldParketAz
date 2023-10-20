@@ -1,0 +1,42 @@
+{% extends 'home_templates/base.html' %}
+{% load static %}
+
+
+
+{% block category_page %}
+
+    <div class="container">
+        <!--  design section start -->
+        <div class="design_section layout_padding">
+            <div id="my_slider" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active ">
+                        <div class="container">
+                            <div class="design_section_2">
+                                <div class="row">
+                                    {% for cats in category %}
+                                        <div class="col-md-3 p-2">
+                                            <div class="box_main">
+                                                <p class="chair_text">{{ cats.name|upper }}</p>
+                                                <div class="image_3">
+                                                    <a href="{{ cats.get_absalute_url_shop_page_one }}">
+                                                        <img src="{{ cats.shop_img.url }}"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--  design section end -->
+    </div>
+
+
+
+{% endblock %}
