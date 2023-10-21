@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "GoldParketAz/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "GoldParketAz/wsgi.py"
+      }
+    ]
+}
